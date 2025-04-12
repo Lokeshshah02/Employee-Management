@@ -1,0 +1,13 @@
+<div class="employee-list">
+    <button routerLink="/employees/new">Add Employee</button>
+  
+    <div *ngFor="let emp of employees">
+      <img [src]="emp.avatar" alt="Avatar">
+      <h3>{{ emp.name }}</h3>
+      <p>{{ emp.designation }} - {{ emp.companyName }}</p>
+      <button [routerLink]="['/employees', emp.id]">View</button>
+      <button (click)="edit(emp)">Edit</button>
+      <button (click)="confirmDelete(emp.id)">Delete</button>
+    </div>
+  </div>
+  
