@@ -1,28 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from '../../models/employee.model';
 import { EmployeeService } from '../../services/employee.services';
 
 @Component({
   selector: 'app-employee-detail',
-  template: `
-    <div *ngIf="employee">
-      <img [src]="employee.avatar">
-      <h2>{{ employee.name }}</h2>
-      <p>{{ employee.designation }}</p>
-      <p>{{ employee.companyName }}</p>
-      <p>{{ employee.email }}</p>
-      <p>{{ employee.contact }}</p>
-    </div>
-  `
+  templateUrl: './employee-detail.component.html',  
+  styleUrls: ['./employee-detail.component.scss']
 })
 export class EmployeeDetailComponent implements OnInit {
-  employee: Employee;
+  employee: Employee | null = null;
 
-  constructor(private route: ActivatedRoute, private employeeService: EmployeeService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private employeeService: EmployeeService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = +this.route.snapshot.paramMap.get('id'); 
     this.employee = this.employeeService.getEmployeeById(id);
+
+    if (!this.employee) {
+      this.router.navigate(['/employees']);
+    }
+  }
+
+  goBack(): void {
+    window.history.back(); 
   }
 }

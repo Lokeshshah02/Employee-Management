@@ -1,1 +1,28 @@
-<p>employee-detail works!</p>
+<div *ngIf="employee" class="employee-detail-card">
+    <div class="employee-header">
+      <img [src]="employee.avatar" alt="{{ employee.name }}'s Avatar" class="employee-avatar">
+      <h2>{{ employee.name }}</h2>
+      <p class="employee-position">{{ employee.designation }}</p>
+    </div>
+    
+    <div class="employee-info">
+      <div class="info-item">
+        <label>Company:</label>
+        <span>{{ employee.companyName }}</span>
+      </div>
+      <div class="info-item">
+        <label>Email:</label>
+        <span>{{ employee.email }}</span>
+      </div>
+      <div class="info-item">
+        <label>Contact:</label>
+        <span>{{ employee.contact }}</span>
+      </div>
+    </div>
+    
+    <div class="action-buttons">
+      <button class="btn btn-primary" [routerLink]="['/employees', employee.id, 'edit']">Edit</button>
+      <button class="btn btn-secondary" (click)="goBack()">Go Back</button>
+    </div>
+  </div>
+  
