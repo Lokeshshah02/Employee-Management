@@ -6,7 +6,8 @@ import { EmployeeService } from '../../services/employee.services';
 
 @Component({
   selector: 'app-employee-form',
-  templateUrl: './employee-form.component.html'
+  templateUrl: './employee-form.component.html',
+  styleUrls: ['./employee-form.component.scss'] 
 })
 export class EmployeeFormComponent implements OnInit {
   form: FormGroup;
@@ -52,5 +53,10 @@ export class EmployeeFormComponent implements OnInit {
       }
       this.router.navigate(['/employees']);
     }
+  }
+
+  onCancel() {
+    this.form.reset();
+    this.router.navigate(['/employees']);
   }
 }
